@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.capstone.project.trashhub.databinding.ActivityLoginBinding
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         auth = Firebase.auth
         supportActionBar?.hide()
-
+        showLoading(false)
         setupAction()
         configGoogle()
         googleBtnClick()
@@ -39,21 +40,25 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.btnLogin.setOnClickListener {
+            showLoading(true)
             val email: String = binding.emailEdtText.text.toString().trim()
             val pass: String = binding.passwordEdtText.text.toString().trim()
 
             when {
                 email.isEmpty() -> {
+                    showLoading(false)
                     binding.emailEdtText.error = "Email tidak boleh kosong"
                     binding.emailEdtText.requestFocus()
                     return@setOnClickListener
                 }
                 pass.isEmpty() -> {
+                    showLoading(false)
                     binding.passwordEdtText.error = "Password tidak boleh kosong"
                     binding.passwordEdtText.requestFocus()
                     return@setOnClickListener
                 }
             }
+
             loginUser(email, pass)
         }
         binding.btnRegister.setOnClickListener {
@@ -65,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) {
+                    showLoading(false)
                     Intent(
                         this@LoginActivity,
                         MainActivity::class.java
@@ -73,15 +79,21 @@ class LoginActivity : AppCompatActivity() {
                             Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
+                    Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                    showLoading(false)
+                    Toast.makeText(
+                        this,
+                        "Login gagal Periksa Email dan Password",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
     }
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null){
+        if (auth.currentUser != null) {
             Intent(
                 this@LoginActivity,
                 MainActivity::class.java
@@ -94,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //GOOGLE
-    private fun configGoogle(){
+    private fun configGoogle() {
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -104,8 +116,9 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    private fun googleBtnClick(){
+    private fun googleBtnClick() {
         binding.btnGoogle.setOnClickListener {
+            showLoading(true)
             signIn()
         }
     }
@@ -150,9 +163,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null){
+        if (currentUser != null) {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 
