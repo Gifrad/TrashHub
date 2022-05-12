@@ -23,18 +23,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         showLoading(false)
         userValidation()
-        setUsername()
         setupAction()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun setUsername() {
-        val user = Firebase.auth.currentUser
-        if (user != null) {
-            binding.tvUsername.text = "Hai ${user.displayName}"
-        } else {
-            binding.tvUsername.text = "Username tidak di ketahui"
-        }
     }
 
     @SuppressLint("SetTextI18n")
