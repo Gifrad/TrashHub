@@ -14,7 +14,10 @@
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
+<<<<<<< HEAD
         <option name="resolveModulePerSourceSet" value="false" />
+=======
+>>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
       </GradleProjectSettings>
     </option>
   </component>

@@ -14,6 +14,10 @@
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/xml/file_paths.xml" value="0.1" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/Users/fathanazka/final project/TrashHub-master/app/src/main/res/layout/activity_profile.xml" value="0.5" />
+>>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
       </map>
     </option>
   </component>

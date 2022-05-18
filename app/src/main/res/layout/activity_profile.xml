@@ -21,6 +21,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+<<<<<<< HEAD
+=======
+            android:id="@+id/btn_back"
+>>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="-5dp"
@@ -117,6 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_edt_text" />
 
+<<<<<<< HEAD
     <EditText
         android:id="@+id/jenisKelamin_edt_text"
         android:layout_width="match_parent"
@@ -132,6 +137,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_jenisKelamin" />
+=======
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_kelamin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:singleSelection="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_jenisKelamin">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="male"
+                style="@style/CustomChipStyle"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="female"
+                style="@style/CustomChipStyle"/>
+
+            <EditText
+                android:id="@+id/jenisKelamin_edt_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_group_kelamin" />
+        </com.google.android.material.chip.ChipGroup>
+>>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
 
     <TextView
         android:id="@+id/tv_noHp"
@@ -142,7 +189,11 @@
         android:text="No Telepon"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@id/jenisKelamin_edt_text" />
+=======
+        app:layout_constraintTop_toBottomOf="@id/chip_group_kelamin" />
+>>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
 
     <EditText
         android:id="@+id/noHp_edt_text"
