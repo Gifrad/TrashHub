@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">TrashHub</string>
+    <string name="title_login">Siap untuk mengelola sampah</string>
+    <string name="subtitle_login">Masukkan data diri anda melalui TrashHub App</string>
+    <string name="email_is_invalid">Email tidak valid</string>
+    <string name="password_min_6_char">password kurang dari 6 character</string>
+    <string name="password">Password</string>
+    <string name="title_register">Kelola sampah anda</string>
+    <string name="name">Nama</string>
+    <string name="subtitle_register">Dengan mendaftarkan diri anda melalui TrashHub App</string>
+    <string name="email">Email</string>
+    <string name="conf_pass">Ulangi Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="login_option">Atau masuk dengan</string>
+    <string name="username_not_found">Username tidak ada</string>
+    <string name="cari_bank_sampah">Cari bank sampah</string>
+    <string name="hai_username">Hai Username</string>
+    <string name="selamat_pagi">Selamat pagi</string>
+    <string name="jumlah_poin">200 poin</string>
+    <string name="paragraf_home">Scan sampahmu agar mendapatkan pengetahuan</string>
+    <string name="angkut_sampah">Angkut Sampah</string>
+    <string name="jual_sampah">Jual Sampah</string>
+    <string name="riwayat_pesanan">Riwayat Pesanan</string>
+    <string name="Title_home">Rekomendasi</string>
+    <string name="sub_title_home">Bank sampah sekitarmu</string>
+
+</resources>
