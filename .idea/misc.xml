@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/back_button.xml" value="0.1" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/bg_profile.xml" value="0.1" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/custom_button.xml" value="0.1" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/custom_input.xml" value="0.1205" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/ic_bg_simpan.xml" value="0.1205" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/drawable/ic_sapaan.xml" value="0.1205" />
-        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_login.xml" value="0.18" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_main.xml" value="0.17592592592592593" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/BANGKIT 2022/KELAS/Project Capstone/Project Android Studio/TrashHub1/app/src/main/res/xml/file_paths.xml" value="0.1" />
       </map>
     </option>
   </component>

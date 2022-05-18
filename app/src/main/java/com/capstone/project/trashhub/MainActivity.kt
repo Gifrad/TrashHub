@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             showLoading(true)
             signOut()
         }
+
+        binding.imgProfile.setOnClickListener {
+            startActivity(Intent(this,ProfileActivity::class.java))
+        }
     }
 
     private fun signOut() {
