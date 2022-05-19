@@ -6,20 +6,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-<<<<<<< HEAD
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.capstone.project.trashhub.databinding.ActivityProfileBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import java.io.ByteArrayOutputStream
-
-class ProfileActivity : AppCompatActivity() {
-=======
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -46,16 +32,11 @@ import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
 class ProfileActivity : AppCompatActivity(), View.OnClickListener {
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var imageUri: Uri
     private lateinit var auth: FirebaseAuth
-<<<<<<< HEAD
-    private lateinit var db: FirebaseDatabase
-=======
     private lateinit var firebaseFirestore: FirebaseFirestore
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,25 +45,13 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
         supportActionBar?.hide()
         auth = FirebaseAuth.getInstance()
-<<<<<<< HEAD
-        database = Firebase.database.reference
-=======
         firebaseFirestore = FirebaseFirestore.getInstance()
 
         binding.btnBack.setOnClickListener(this)
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
         setupAction()
     }
 
     private fun setupAction() {
-<<<<<<< HEAD
-        db = Firebase.database
-        val profile = db.reference.child(PROFILE)
-        val user = auth.currentUser
-        val name = binding.nameEdtText.setText(user?.displayName).toString()
-        val email = binding.emailEdtText.setText(user?.email).toString()
-
-=======
         val user = auth.currentUser
         val name = binding.nameEdtText.text.toString()
         val alamat = binding.alamatEdtText.text.toString()
@@ -113,40 +82,16 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
 
         }
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
         binding.imgProfile.setOnClickListener {
             intentCamera()
         }
         binding.btnSimpan.setOnClickListener {
-<<<<<<< HEAD
-=======
 
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
             val image = when{
                 ::imageUri.isInitialized -> imageUri
                 user?.photoUrl == null -> Uri.parse(R.drawable.icon_camera.toString())
                 else -> user.photoUrl }
 
-<<<<<<< HEAD
-            val updateProfile = Profile(
-                name,
-                email,
-                image.toString(),
-                binding.jenisKelaminEdtText.text.toString(),
-                binding.alamatEdtText.text.toString(),
-                binding.noHpEdtText.text.toString()
-
-            )
-            profile.push().setValue(updateProfile) { error, _ ->
-                if (error != null) {
-                    Toast.makeText(this, "Gagal menyimpan" + error.message, Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    Toast.makeText(this, "Berhasil menyimpan", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-=======
             val userDetail = hashMapOf(
                 "id" to user?.uid,
                 "name" to name,
@@ -181,7 +126,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 })
                 .addOnFailureListener { e -> Log.w("ProfileActivity", "Error updating document", e) }
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
 
         }
     }
@@ -200,10 +144,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-<<<<<<< HEAD
-=======
     @Deprecated("Deprecated in Java")
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
@@ -239,8 +180,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         const val PROFILE = "profile"
     }
 
-<<<<<<< HEAD
-=======
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_back ->{
@@ -251,5 +190,4 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
->>>>>>> 3ddcdb1 (mengganti firebase database menjadi firestore)
 }
