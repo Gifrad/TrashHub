@@ -21,15 +21,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.MetadataChanges
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
+import java.lang.System.load
 
 class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -60,25 +58,27 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 //        val dataSnapshot =
 
         if(user != null){
-            if (user.photoUrl != null){
-                Picasso.get().load(user.photoUrl).into(binding.imgProfile)
-            }else{
-                Picasso.get().load(R.drawable.ic_baseline_person_50).into(binding.imgProfile)
-            }
 
-            binding.nameEdtText.setText(user.displayName)
             binding.emailEdtText.setText(user.email)
-            firebaseFirestore.collection(PROFILE_NAME).whereEqualTo("id", user?.uid)
-                .get()
-                .addOnSuccessListener { result ->
-                    for (r in result) {
-                        Log.d("TAG", "${r.id} => ${r.data.get("photoUrl")}")
-//                        binding.imgProfile.setImageResource(r.data.get("photoUrl"))
+            firebaseFirestore.collection(PROFILE_NAME).whereEqualTo("id",user?.uid).get()
+                .addOnSuccessListener {
+                    for (doc in it){
+                        Log.d("TAG", "onEvent: ${it.documents.get(0).data?.get("jenisKelamin")}")
+                        Log.d("TAG", "onEvent: ${it.documents.get(0).data?.get("photoUrl")}")
+//                        binding.imgProfile.setImageResource(value.get(""))
+                        binding.nameEdtText.setText(it.documents.get(0).data?.get("name").toString())
+                        binding.alamatEdtText.setText(it.documents.get(0).data?.get("alamat").toString())
+                        binding.jenisKelaminEdtText.setText(it.documents.get(0).data?.get("jenisKelamin").toString())
+//                        if (it.documents.get(0).data?.get("photoUrl") == null){
+//                            Picasso.get().load(R.drawable.icon_coin).into(binding.imgProfile)
+//
+//                        }
+                        Picasso.get().load(it.documents.get(0).data?.get("photoUrl").toString()).into(binding.imgProfile)
+
                     }
                 }
-                .addOnFailureListener { exception ->
-                    Log.w("TAG", "Error getting documents.", exception)
-                }
+//
+//                        binding.imgProfile.setImageResource(value?.get("photoUrl") as Int)
 
 
         }
@@ -90,15 +90,22 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             val image = when{
                 ::imageUri.isInitialized -> imageUri
                 user?.photoUrl == null -> Uri.parse(R.drawable.icon_camera.toString())
-                else -> user.photoUrl }
+                else -> firebaseFirestore.collection(PROFILE_NAME).whereEqualTo("id",user?.uid).get()
+                    .addOnSuccessListener {
+                        for (doc in it){
+                            Picasso.get().load(it.documents.get(0).data?.get("photoUrl").toString()).into(binding.imgProfile)
+                        }
+                    } }
 
+            var nama = user?.displayName
+            nama = name
             val userDetail = hashMapOf(
                 "id" to user?.uid,
-                "name" to name,
+                "name" to nama,
                 "jenisKelamin" to false,
                 "noHp" to noHp,
                 "photoUrl" to image,
-                "alamat" to "",
+                "alamat" to alamat,
                 "poin" to ""
             )
             firebaseFirestore.collection(PROFILE_NAME)
