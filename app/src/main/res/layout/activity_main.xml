@@ -18,7 +18,6 @@
             android:layout_height="170dp"
             android:background="@drawable/bg_home"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -32,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
+                <TextView
                     android:id="@+id/et_search"
                     android:layout_width="193dp"
                     android:layout_height="match_parent"
@@ -186,10 +185,11 @@
             android:id="@+id/icon_angkut_sampah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="23dp"
             android:background="@drawable/icon_angkut_sampah"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icon_riwayat"
             app:layout_constraintTop_toBottomOf="@id/layout_bg_scan" />
 
         <ImageView
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:background="@drawable/icon_jual_sampah"
-            app:layout_constraintEnd_toStartOf="@id/icon_riwayat"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_angkut_sampah"
             app:layout_constraintTop_toBottomOf="@+id/layout_bg_scan" />
 
@@ -207,9 +207,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:layout_marginEnd="64dp"
+            android:background="@drawable/icon_riwayat"
+            app:layout_constraintEnd_toStartOf="@id/icon_maps"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_bg_scan" />
+
+        <ImageView
+            android:id="@+id/icon_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/icon_riwayat"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/icon_jual_sampah"
             app:layout_constraintTop_toBottomOf="@id/layout_bg_scan" />
 
         <TextView
@@ -248,6 +259,18 @@
             app:layout_constraintStart_toStartOf="@+id/icon_riwayat"
             app:layout_constraintTop_toBottomOf="@id/icon_riwayat" />
 
+        <TextView
+            android:id="@+id/tv_maps"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Bank Sampah Terdekat"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/icon_maps"
+            app:layout_constraintStart_toStartOf="@+id/icon_maps"
+            app:layout_constraintTop_toBottomOf="@id/icon_maps" />
+
         <ImageView
             android:id="@+id/img_home"
             android:layout_width="match_parent"
@@ -258,7 +281,7 @@
             android:background="@drawable/image_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_jual_sampah" />
+            app:layout_constraintTop_toBottomOf="@id/tv_maps" />
 
         <TextView
             android:id="@+id/tv_rekomendasi"

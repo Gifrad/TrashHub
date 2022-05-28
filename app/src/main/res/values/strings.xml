@@ -24,5 +24,6 @@
     <string name="riwayat_pesanan">Riwayat Pesanan</string>
     <string name="Title_home">Rekomendasi</string>
     <string name="sub_title_home">Bank sampah sekitarmu</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
