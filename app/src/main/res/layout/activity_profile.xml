@@ -133,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="male"
+                android:textColor="@color/black"
                 style="@style/CustomChipStyle"/>
 
             <com.google.android.material.chip.Chip
@@ -140,6 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="female"
+                android:textColor="@color/black"
                 style="@style/CustomChipStyle"/>
 
             <EditText
@@ -219,7 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simpan"
-            android:layout_marginTop="113dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#EEBB59"

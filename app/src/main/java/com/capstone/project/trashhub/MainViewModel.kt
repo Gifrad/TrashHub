@@ -11,17 +11,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
 
-    private val _apiMess = MutableLiveData<String>()
-    val apiMess : LiveData<String> = _apiMess
+/*    private val _apiMess = MutableLiveData<String>()
+    val apiMess : LiveData<String> = _apiMess*/
 
+//        FUNGSI 1
     val listUser = MutableLiveData<ArrayList<ListStoryUser>>()
 
 
-    fun getAllListStory(token : String){
+    fun getAllListStory() {
         val listStory = ArrayList<ListStoryUser>()
-        val client = ApiConfig.getApiService().getAllStory("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXRGUkxmTjk0WGJqdjhHT2EiLCJpYXQiOjE2NTMxNDgwMTN9.P5Tda4xE6EkL55AfMa0gylmV8DqdkvNAy5RlOq7VT08")
+        val client = ApiConfig.getApiService().getAllStory("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXRGUkxmTjk0WGJqdjhHT2EiLCJpYXQiOjE2NTMxNDgwMTN9.P5Tda4xE6EkL55AfMa0gylmV8DqdkvNAy5RlOq7VT08", 1)
 
         client.enqueue(object : Callback<AllStoryResponse> {
             override fun onResponse(
@@ -35,14 +36,14 @@ class MainViewModel() : ViewModel() {
                     listUser.value = listStory
                 }else{
                     Log.d("MainActivity", "Token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXRGUkxmTjk0WGJqdjhHT2EiLCJpYXQiOjE2NTMxNDgwMTN9.P5Tda4xE6EkL55AfMa0gylmV8DqdkvNAy5RlOq7VT08")
-                    _apiMess.value = response.body()?.message
+//                    _apiMess.value = response.body()?.message
                     Log.e("MainActivity", "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
                 Log.d("MainActivity :", "Token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXRGUkxmTjk0WGJqdjhHT2EiLCJpYXQiOjE2NTMxNDgwMTN9.P5Tda4xE6EkL55AfMa0gylmV8DqdkvNAy5RlOq7VT08")
-                _apiMess.value = t.message
+//                _apiMess.value = t.message
                 Log.e("MainActivity","onFailure: ${t.message}")
             }
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -61,11 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        mainViewModel.getAllListStory("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXRGUkxmTjk0WGJqdjhHT2EiLCJpYXQiOjE2NTMxNDgwMTN9.P5Tda4xE6EkL55AfMa0gylmV8DqdkvNAy5RlOq7VT08")
+        mainViewModel.getAllListStory()
 
-        mainViewModel.apiMess.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
+        /* mainViewModel.apiMess.observe(this) {
+             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+         }*/
     }
 
     private fun getAdapter(listStory : ArrayList<ListStoryUser>){

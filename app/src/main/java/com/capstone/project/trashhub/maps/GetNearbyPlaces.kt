@@ -14,10 +14,17 @@ class GetNearbyPlaces : AsyncTask<Any, String, String>() {
     private lateinit var googleplaceData: String
     private lateinit var url: String
     private lateinit var mMap: GoogleMap
+//    private lateinit var latLng : LatLng
 
-    override fun doInBackground(vararg p0: Any): String {
-        mMap = p0[0] as GoogleMap
-        url = p0[1] as String
+    override fun doInBackground(vararg objects: Any): String {
+        /*if(objects[0] is GoogleMap)
+            mMap = objects[0] as GoogleMap
+        if(objects[1] is String)
+            url = objects[1] as String*/
+        /*if(objects[2] is LatLng)
+            latLng = objects[2] as LatLng*/
+        mMap = objects[0] as GoogleMap
+        url = objects[1] as String
         val downloadUrl = DownloadUrl()
         try {
             googleplaceData = downloadUrl.readTheURL(url)
@@ -45,7 +52,7 @@ class GetNearbyPlaces : AsyncTask<Any, String, String>() {
             val latLng = LatLng(lat, lng)
             markerOptions.position(latLng)
             markerOptions.title("$nameOfPlace : $vicinity")
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
             mMap.addMarker(markerOptions)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10f))

@@ -185,6 +185,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_back ->{
                 Intent(this,MainActivity::class.java).let {
                     startActivity(it)
+                    finishAffinity()
                 }
             }
         }

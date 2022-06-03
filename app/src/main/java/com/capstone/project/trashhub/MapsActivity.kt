@@ -4,6 +4,7 @@ package com.capstone.project.trashhub
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -14,8 +15,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.capstone.project.trashhub.databinding.ActivityMapsBinding
-import com.capstone.project.trashhub.maps.GetNearbyPlaces
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,21 +24,22 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
-import java.lang.StringBuilder
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude = 0.0
-    private var longitude = 0.0
-    private val proximityRadius = 10000
-    private lateinit var latLng: LatLng
-
+    private lateinit var mapsViewModel: MapsViewModel
+//    LAT LONG BANK SAMPAH
+    /* private var latitude = 0.0
+     private var longitude = 0.0
+     private val proximityRadius = 10000
+     */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupViewModel()
         supportActionBar?.hide()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -54,14 +57,46 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         setupAction()
+        setAdapter()
 
 
     }
 
+    private fun setupViewModel() {
+        mapsViewModel = ViewModelProvider(this).get(MapsViewModel::class.java)
+        mapsViewModel.getBankSampahLocation()
+    }
+
+    private fun setAdapter() {
+        val userMarkerOptions = MarkerOptions()
+        mapsViewModel.listStory.observe(this) {
+            for (element in it) {
+                Log.d("Data Map: ", element.lat.toString() + " lon =" + element.lon.toString())
+                val location = LatLng(element.lat, element.lon)
+                val geofenceRadius = 400.0
+                userMarkerOptions.position(location)
+                userMarkerOptions.title(element.name)
+                userMarkerOptions.snippet("\"${element.lat}, ${element.lon}")
+                userMarkerOptions.icon(
+                    BitmapDescriptorFactory.defaultMarker(
+                        BitmapDescriptorFactory.HUE_GREEN
+                    )
+                )
+                mMap.addMarker(userMarkerOptions)
+                mMap.addCircle(
+                    CircleOptions()
+                        .center(location)
+                        .radius(geofenceRadius)
+                        .fillColor(Color.GREEN)
+                        .strokeColor(Color.GREEN)
+                        .strokeWidth(3f)
+                )
+
+            }
+        }
+    }
+
     private fun setupAction() {
-        val bankSampah = "bank sampah"
-        val transferData = arrayOfNulls<Any>(2)
-        val getNearbyPlaces = GetNearbyPlaces()
         binding.searchAddress.setOnClickListener {
             val address = binding.locationSearch.text.toString()
             var addressList: List<Address>? = null
@@ -99,18 +134,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+
+//        PLACE API KLIK
+/*
+        val bankSampah = "clothing_store"
+        val transferData = arrayOfNulls<Any>(2)
+        val getNearbyPlaces = GetNearbyPlaces()
+
         binding.btnBankSampahTerdekat.setOnClickListener {
             mMap.clear()
             val url = getUrl(latitude , longitude, bankSampah)
             transferData[0] = mMap
             transferData[1] = url
-            getNearbyPlaces.execute(transferData)
+            getNearbyPlaces.execute(mMap,url,transferData)
             Toast.makeText(this, "Mencari Bank Sampah terdekat...", Toast.LENGTH_SHORT).show()
             Toast.makeText(this, "Menampilkan Bank Samapah...", Toast.LENGTH_SHORT).show()
         }
+*/
 
 
-
+//      fOR LOOP FAILED 1
         /* addressList = geocoder.getFromLocationName(address, 6)
          if (addressList != null){
              val i = 0
@@ -133,21 +176,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    private fun getUrl(latitude: Double, longitude: Double, nearbyPlace: String): String {
-        val googleURL =
-            StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?")
-        googleURL.append("location=$latitude,$longitude")
-        googleURL.append("&radius=$proximityRadius")
-        googleURL.append("&type=$nearbyPlace")
-        googleURL.append("&sensor=true")
-        googleURL.append("&key=" + "AIzaSyCO8pXhlZhFob_DDM-1ZXF8EDk2cdoDeWM")
-        Log.d("GoogleMapsActivity", "url = $googleURL")
+//    fUNGSI UNTUK MEMANGGIL API KEY PLACES
 
-        return googleURL.toString()
-    }
+    /*  private fun getUrl(latitude: Double, longitude: Double, nearbyPlace: String): String {
+          val googleURL =
+              StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?")
+          googleURL.append("location=$latitude,$longitude")
+          googleURL.append("&radius=$proximityRadius")
+          googleURL.append("&type=$nearbyPlace")
+          googleURL.append("&sensor=true")
+  //        googleURL.append("&key=" + "AIzaSyCO8pXhlZhFob_DDM-1ZXF8EDk2cdoDeWM")
+          Log.d("GoogleMapsActivity", "url = $googleURL")
 
-
-
+          return googleURL.toString()
+      }*/
 
 
     /**
@@ -253,14 +295,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun showStartMarker(location: Location) {
-        latitude = location.latitude
-        longitude = location.longitude
+//       GET NERBY PLACE
+        /* latitude = location.latitude
+        longitude = location.longitude*/
         val startLocation = LatLng(location.latitude, location.longitude)
         mMap.addMarker(
             MarkerOptions()
                 .position(startLocation)
                 .title("My Location")
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 10f))
     }
+
 }

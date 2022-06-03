@@ -37,18 +37,6 @@
         map:layout_constraintTop_toBottomOf="@id/location_search"
         />
 
-    <Button
-        android:id="@+id/btn_bank_sampah_terdekat"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:text="Bank Sampah Terdekat"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:layout_marginBottom="16dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/celestial_green"
-        map:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
